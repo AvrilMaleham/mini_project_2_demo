@@ -18,8 +18,24 @@ const getOrderById = (req, res) => {
     res.json(order);
 };
 
+const createOrder = (req, res) => {
+    const newOrder = {
+        id: pizzaOrders.length + 1,
+        customerName: req.body.customerName,
+        pizzaType: req.body.pizzaType,
+        extraToppings: req.body.extraToppings,
+        quantity: req.body.quantity,
+        drink: req.body.drink,
+        status: req.body.status,
+    };
+    pizzaOrders.push(newOrder);
+    res.status(201).json(newOrder);
+};
+
+
 
 module.exports = {
     getOrders,
-    getOrderById
+    getOrderById,
+    createOrder,
 };
