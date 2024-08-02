@@ -32,10 +32,23 @@ const createOrder = (req, res) => {
     res.status(201).json(newOrder);
 };
 
-
+const updateOrder = (req, res) => {
+    const order = pizzaOrders.find(o => o.id === parseInt(req.params.id));
+    if (!order) {
+        return res.status(404).send('Order not found');
+    }
+    order.customerName = req.body.customerName;
+    order.pizzaType = req.body.pizzaType;
+    order.extraToppings = req.body.extraToppings;
+    order.quantity = req.body.quantity;
+    order.drink = req.body.drink;
+    order.status = req.body.status;
+    res.json(order);
+};
 
 module.exports = {
     getOrders,
     getOrderById,
     createOrder,
+    updateOrder,
 };
