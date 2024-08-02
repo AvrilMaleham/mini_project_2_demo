@@ -46,9 +46,19 @@ const updateOrder = (req, res) => {
     res.json(order);
 };
 
+const deleteOrder = (req, res) => {
+    const orderIndex = pizzaOrders.findIndex(o => o.id === parseInt(req.params.id));
+    if (orderIndex === -1) {
+        return res.status(404).send('Order not found');
+    }
+    const deletedOrder = pizzaOrders.splice(orderIndex, 1);
+    res.json(deletedOrder);
+};
+
 module.exports = {
     getOrders,
     getOrderById,
     createOrder,
     updateOrder,
+    deleteOrder
 };
